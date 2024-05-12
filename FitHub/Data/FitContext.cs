@@ -10,10 +10,10 @@ namespace FitHub.Data
         {
 
         }
-        DbSet<Member> Members { get; set; }
-        DbSet<Attendance> Attendances{ get; set; }
-        DbSet<Subscription> Subscriptions { get; set; }
-        DbSet<SubscriptionType> SubscriptionTypes { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<Attendance> Attendances{ get; set; }
+        public virtual DbSet<Subscription> Subscriptions { get; set; }
+        public virtual DbSet<SubscriptionType> SubscriptionTypes { get; set; }
 
     }
 }

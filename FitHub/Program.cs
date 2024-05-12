@@ -1,5 +1,7 @@
 using FitHub.Data;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,16 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
 
+
+
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+});
+builder.Services.AddFluentValidation(config =>
+{
+    config.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+});
 var app = builder.Build();
 
 using (var scope=app.Services.CreateScope())

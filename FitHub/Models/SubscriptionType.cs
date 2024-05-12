@@ -9,5 +9,7 @@ namespace FitHub.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public required string Description {  get; set; }
+
+        public required decimal Price {  get; set; }
     }
 }
