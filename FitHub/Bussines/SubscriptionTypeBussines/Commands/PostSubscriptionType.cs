@@ -10,12 +10,12 @@ namespace FitHub.Bussines.SubscriptionTypeBussines.Commands
 {
     public class PostSubscriptionType
     {
-        public class PostSubscriptionTypeCommand : IRequest<SubscriptionTypePostResponse>
+        public class PostSubscriptionTypeCommand : IRequest<SubscriptionTypeDto>
         {
             public required string Description { get; set; }
             public required decimal Price { get; set; }
         }
-        public class PostSubscriptionTypeHandler : IRequestHandler<PostSubscriptionTypeCommand, SubscriptionTypePostResponse>
+        public class PostSubscriptionTypeHandler : IRequestHandler<PostSubscriptionTypeCommand, SubscriptionTypeDto>
         {
             private readonly FitContext _context;
             private readonly SubscriptionTypePostValidator _validations;
@@ -26,7 +26,7 @@ namespace FitHub.Bussines.SubscriptionTypeBussines.Commands
                 this._validations = validations;
             }
 
-            public async Task<SubscriptionTypePostResponse> Handle(PostSubscriptionTypeCommand request, CancellationToken cancellationToken)
+            public async Task<SubscriptionTypeDto> Handle(PostSubscriptionTypeCommand request, CancellationToken cancellationToken)
             {
                 _validations.Validate(request);
                 try
@@ -38,7 +38,7 @@ namespace FitHub.Bussines.SubscriptionTypeBussines.Commands
                     };
                    await _context.SubscriptionTypes.AddAsync(subscriptionType);
                    await _context.SaveChangesAsync();
-                     SubscriptionTypePostResponse rta = new()
+                     SubscriptionTypeDto rta = new()
                     {
                         Price = request.Price,
                         Description = request.Description,

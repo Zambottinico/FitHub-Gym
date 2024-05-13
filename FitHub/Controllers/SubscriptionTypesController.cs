@@ -1,7 +1,11 @@
 ﻿using FitHub.Bussines.SubscriptionTypeBussines.Commands;
+using FitHub.Bussines.SubscriptionTypeBussines.Queries;
+using FitHub.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using static FitHub.Bussines.SubscriptionTypeBussines.Commands.DeleteSubscriptionType;
 using static FitHub.Bussines.SubscriptionTypeBussines.Commands.PostSubscriptionType;
+using static FitHub.Bussines.SubscriptionTypeBussines.Queries.GetSubscriptionTypes;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,9 +24,9 @@ namespace FitHub.Controllers
 
         // GET: api/<SubscriptionTypesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<SubscriptionTypeDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _mediator.Send(new GetSubscriptionTypesCommand());
         }
 
         // GET api/<SubscriptionTypesController>/5
@@ -34,7 +38,7 @@ namespace FitHub.Controllers
 
         // POST api/<SubscriptionTypesController>
         [HttpPost]
-        public async Task<Dtos.SubscriptionTypePostResponse> Post([FromBody] PostSubscriptionTypeCommand request)
+        public async Task<Dtos.SubscriptionTypeDto> Post([FromBody] PostSubscriptionTypeCommand request)
         {
             return await _mediator.Send(request);
         }
@@ -47,8 +51,9 @@ namespace FitHub.Controllers
 
         // DELETE api/<SubscriptionTypesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<SubscriptionTypeDto> DeleteAsync(int id)
         {
+            return await _mediator.Send(new DeleteSubscriptionTypeCommand(id));
         }
     }
 }

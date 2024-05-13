@@ -1,6 +1,6 @@
 ﻿namespace FitHub.Dtos
 {
-    public class SubscriptionTypePostResponse
+    public class SubscriptionTypeDto
     {
         public int Id { get; set; }
         public required string Description { get; set; }
