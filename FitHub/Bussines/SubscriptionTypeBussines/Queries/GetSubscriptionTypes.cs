@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FitHub.Bussines.SubscriptionTypeBussines.Queries
 {
-    public class GetSubscriptionTypes
+    public class GetSubscriptionType
     {
         public class GetSubscriptionTypesCommand : IRequest<List<SubscriptionTypeDto>>
         {

@@ -3,6 +3,9 @@ using FitHub.Bussines.SubscriptionTypeBussines.Queries;
 using FitHub.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using static FitHub.Bussines.MemberBussines.Commands.DeleteMember;
+using static FitHub.Bussines.MemberBussines.Commands.PostMember;
+using static FitHub.Bussines.MemberBussines.Queries.GetMembers;
 using static FitHub.Bussines.SubscriptionTypeBussines.Commands.DeleteSubscriptionType;
 using static FitHub.Bussines.SubscriptionTypeBussines.Commands.PostSubscriptionType;
 using static FitHub.Bussines.SubscriptionTypeBussines.Queries.GetSubscriptionType;
@@ -14,20 +17,20 @@ namespace FitHub.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubscriptionTypesController : ControllerBase
+    public class MemberController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public SubscriptionTypesController(IMediator mediator)
+        public MemberController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         // GET: api/<SubscriptionTypesController>
         [HttpGet]
-        public async Task<List<SubscriptionTypeDto>> Get()
+        public async Task<List<MemberDto>> Get()
         {
-            return await _mediator.Send(new GetSubscriptionTypesCommand());
+            return await _mediator.Send(new GetMembersCommand());
         }
 
         // GET api/<SubscriptionTypesController>/5
@@ -39,7 +42,7 @@ namespace FitHub.Controllers
 
         // POST api/<SubscriptionTypesController>
         [HttpPost]
-        public async Task<Dtos.SubscriptionTypeDto> Post([FromBody] PostSubscriptionTypeCommand request)
+        public async Task<MemberDto> Post([FromBody] PostMemberCommand request)
         {
             return await _mediator.Send(request);
         }
@@ -52,9 +55,9 @@ namespace FitHub.Controllers
 
         // DELETE api/<SubscriptionTypesController>/5
         [HttpDelete("{id}")]
-        public async Task<SubscriptionTypeDto> DeleteAsync(int id)
+        public async Task<MemberDto> DeleteAsync(int id)
         {
-            return await _mediator.Send(new DeleteSubscriptionTypeCommand(id));
+            return await _mediator.Send(new DeleteMemberCommand(id));
         }
     }
 }

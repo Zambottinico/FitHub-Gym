@@ -13,10 +13,10 @@ namespace FitHub.Models
         public string LastName { get; set; }
 
         public string Dni {  get; set; }
-        public int SubscriptionId { get; set; }
+        public int? SubscriptionId { get; set; }
 
         [ForeignKey("SubscriptionId")]
-        public virtual Subscription Subscription { get; set; }
+        public virtual Subscription? Subscription { get; set; }
 
         public virtual ICollection<Attendance> Attendances { get; set; }
     }
